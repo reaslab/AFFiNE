@@ -52,7 +52,7 @@ jobs:
       - name: Build Core
         run: yarn nx build @affine/web --skip-nx-cache
         env:
-          BUILD_TYPE: canary
+          BUILD_TYPE: stable
           SHOULD_REPORT_TRACE: false
           PUBLIC_PATH: '/'
           SELF_HOSTED: true
