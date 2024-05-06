@@ -101,7 +101,7 @@ export const Quotas: Quota[] = [
       // quota name
       name: 'Free',
       // single blob limit 10MB
-      blobLimit: 10 * OneMB,
+      blobLimit: 100 * OneMB,
       // server limit will larger then client to handle a edge case:
       // when a user downgrades from pro to free, he can still continue
       // to upload previously added files that exceed the free limit
@@ -110,9 +110,9 @@ export const Quotas: Quota[] = [
       // total blob limit 10GB
       storageQuota: 10 * OneGB,
       // history period of validity 7 days
-      historyPeriod: 7 * OneDay,
+      historyPeriod: 300 * OneDay,
       // member limit 3
-      memberLimit: 3,
+      memberLimit: 100,
       // copilot action limit 10
       copilotActionLimit: 10,
     },
@@ -129,9 +129,9 @@ export const Quotas: Quota[] = [
       // total blob limit 100GB
       storageQuota: 100 * OneGB,
       // history period of validity 30 days
-      historyPeriod: 30 * OneDay,
+      historyPeriod: 300 * OneDay,
       // member limit 10
-      memberLimit: 10,
+      memberLimit: 100,
       // copilot action limit 10
       copilotActionLimit: 10,
     },
