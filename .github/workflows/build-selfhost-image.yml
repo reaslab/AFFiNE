@@ -1,6 +1,8 @@
 name: Build Selfhost Image
 
 on:
+  push:
+    branches: ['canary', 'beta']
   workflow_dispatch:
     inputs:
       flavor:
