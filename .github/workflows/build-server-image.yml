@@ -52,7 +52,7 @@ jobs:
       - name: Build Core
         run: yarn nx build @affine/web --skip-nx-cache
         env:
-          BUILD_TYPE: ${{ github.event.inputs.flavor }}
+          BUILD_TYPE: canary
           SHOULD_REPORT_TRACE: false
           PUBLIC_PATH: '/'
           SELF_HOSTED: true
@@ -180,13 +180,10 @@ jobs:
       - name: Generate Prisma client
         run: yarn workspace @affine/server prisma generate
 
-      - name: Build graphql Dockerfile
-        uses: docker/build-push-action@v5
+      - run: |
+          docker build -f .github/deployment/node/Dockerfile -t affine-graphql . && docker save -o affine-graphql-image affine-graphql
+
+      - uses: actions/upload-artifact@v3
         with:
-          context: .
-          push: true
-          pull: true
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
-          provenance: true
-          file: .github/deployment/node/Dockerfile
-          tags: ghcr.io/toeverything/affine-graphql:${{env.RELEASE_FLAVOR}}-${{ env.GIT_SHORT_HASH }},ghcr.io/toeverything/affine-graphql:${{env.RELEASE_FLAVOR}}
+          name: affine-graphql-oci-image
+          path: ./affine-graphql-image
